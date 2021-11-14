@@ -1,0 +1,44 @@
+{% extends 'elearn/layout.html' %}
+
+{% block body %}
+<div style="float:right; margin-top:-10px">
+<form class="form-inline mr-auto my-lg-0" action="{% url 'searchcourse' %}" method="POST"> 
+  {% csrf_token %}
+  <input class="form-control mr-sm-2" id="searchbar" name="searchcourse" type="search" placeholder="Search"aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" id="searchbotton" type="submit" style="margin-right:20px;"><i class="fa fa-search" aria-hidden="true"></i></button>
+</form>
+</div>
+    <br><br><h2>&nbsp;CourseList</h2>
+
+
+  <table class="table mb-0">
+    <thead>
+      <tr>
+        <th>SubjectID</th>
+        <th>Subject</th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for subject in list %}
+      <tr>
+          <td><a href="{% url 'eachsubject' subject.id %}">{{ subject.subjectid }}</a></td>
+          <td>{{ subject.subject }}</td>
+
+          <td>
+
+            <form method="post" action="{% url 'bookcourselist' subject.id %}">
+              {% csrf_token %}
+            {% if subject.subscribe %}
+              <button type="submit" class="btn btn-danger btn-sm">Subscribe</button>
+            {% else %}
+              <button type="submit" class="btn btn-success btn-sm" >Subscribed</button>
+            {% endif %}
+            </form>
+
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

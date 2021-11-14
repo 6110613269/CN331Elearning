@@ -1,0 +1,105 @@
+{% extends "elearn/layout.html" %}
+{% load static %}
+{% block body %}
+<style>
+
+ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+  appearance: none !important;
+  -moz-appearance: none !important;
+  -webkit-appearance: none !important;
+  -o-appearance: none !important;
+  -ms-appearance: none !important;
+  margin: 0; }
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  -o-box-shadow: none !important;
+  -ms-box-shadow: none !important; }
+
+  
+.form-group {
+  position: relative;
+  margin-bottom: 10px;
+  overflow: hidden; }
+  .form-group:last-child {
+    margin-bottom: 0px; }
+    
+.signup-form, .signup-image, .signin-form, .signin-image {
+  width: 50%;
+  overflow: hidden; }
+
+.register-form {
+  width: 100%; }
+  
+.form-title {
+  margin-bottom: 33px; }
+  
+
+@media screen and (max-width: 1200px) {
+  .container {
+    width: calc( 100% - 30px);
+    max-width: 100%; } }
+@media screen and (min-width: 1024px) {
+  .container {
+    max-width: 1200px; } }
+
+.form-submit {
+  display: inline-block;
+  background: #6dabe4;
+  color: #fff;
+  border-bottom: none;
+  width: auto;
+  padding: 15px 39px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  margin-top: 25px;
+  cursor: pointer; }
+  .form-submit:hover {
+    background: #4292dc; }
+    
+input {
+    width: 100%;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #999;
+    padding: 6px 30px;
+    font-family: Poppins;
+    box-sizing: border-box;
+}
+
+
+</style>
+ <div class="container w-50 mx-auto mt-3 h-100">
+  <div class="signup-form mx-auto px-0">
+                <h2 class="form-title mt-5 text-center pt-3">Edit Profile</h2>
+                <form action="{% url 'editprofile' %}" method="POST" class="register-form" id="register-form">
+                    {% if error_message %}
+                    <h3>{{ error_message }}</h3>
+                    {% endif %}
+                    {% csrf_token %}
+                    <br>
+                    <div class="form-group textform">
+                        <label for="username"><i class="fa fa-user" aria-hidden="true" ></i></label>
+                        <input type="text" name="first_name" id="firstname" maxlength="20" value="{{ request.user.first_name }}" required/>
+                    </div>
+                    <div class="form-group textform">
+                        <label for="pass"><i class="fa fa-user" aria-hidden="true"></i></label>
+                        <input type="text" name="last_name" id="lastname" maxlength="20" value="{{ request.user.last_name }}" required/>
+                    </div>
+              
+                    <div class="form-group form-button mt-2 mb-5">
+                        <a href="{% url 'index' %}" class="form-submit mx-3">Cancel</a> 
+                        <input type="submit" name="submit" id="submit" class="form-submit mx-3" value="Confirm">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        
+{%endblock%}

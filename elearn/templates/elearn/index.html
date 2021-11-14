@@ -1,0 +1,82 @@
+{% extends "elearn/layout.html" %}
+{% load static %}
+{% block body %}
+<!--<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>-->
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+<style>
+    /*#x {*/
+    /*    position: relative;*/
+    /*    float: right;*/
+        /* background: red; */
+    /*    color: black;*/
+    /*    top: -5px;*/
+    /*    right: -210px;*/
+    /*}*/
+    /*.menuform {*/
+    /*    font-size: 15px;*/
+    /*    color:black;*/
+    /*}*/
+    /*.icon {*/
+    /*    height: 60px;*/
+    /*    width: 60px;*/
+    /*    border: white;*/
+    /*    border-radius: 20px;*/
+
+    /*}*/
+    /*.footer {*/
+    /*    position:fixed;*/
+    /*    height: 12em;*/
+    /*    color: #ffffff;*/
+    /*    background-color:#212529;*/
+    /*    bottom: 0px;*/
+    /*    width: 100%;*/
+    /*}*/
+</style>
+
+    {% if user.is_authenticated %}
+
+        <h1>&ensp;Welcome, {{ user.first_name }}    {{ user.last_name}} !</h1>
+        <h2>&ensp;Your last login is {{ user.last_login}} </h2>
+        <br><br>
+        {% if noti %}
+        &ensp;&ensp;&ensp;<i class="fa fa-bell fa-2x" aria-hidden="true" ></i>
+        {% for i in noti %}
+        <div class="col-md-5">
+            <div class="media g-mb-10 media-comment">
+                <div class="media-body u-shadow-v18 g-bg-secondary g-pa-5">
+                    <div class="g-mb-15" style="width: 400px;">
+                        <div id="x">
+                            <a href="{% url 'deletenoti' i.id %}" class="btn btn-danger" >X</a>
+                        </div>
+                        <!--<p class="menuform mt-2"><a href="{% url 'eachsubject' i.id %}">&ensp;{{i.message}}</a></p>-->
+                        <p class="menuform mt-2">>&ensp;{{i.message}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+    {% else %}
+        <h1>&ensp;Welcome to Elearning</h1>
+        <h2>&ensp;Please Login or Signup</h2>
+    {% endif %}
+
+
+
+<footer>
+    <div class="footer">
+        <div class="pt-5 pl-5 footext mb-3">Contact Us</div>
+        <div class="pt-2 pl-5 ">
+            <a href="https://github.com/6110613269/CN331Elearning" target="blank">
+                <img src="{% static 'logo/github.png' %}" class="icon mr-3"></a>
+            <a href="https://drive.google.com/drive/folders/1jYaAjN0GHKeNn_iM26MNqBdFG8cz_Rtb?usp=sharing" target="blank">
+                <img src="{% static 'logo/drive.jpg' %}" class="icon mr-3"></a>
+            <a href="https://www.pivotaltracker.com/n/projects/2535942" target="blank">
+                <img src="{% static 'logo/pivotaltracker.png' %}" class="icon mr-3"></a>
+        </div>
+    </div>
+</footer>
+
+{%endblock%}
+
